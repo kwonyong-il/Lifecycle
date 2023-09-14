@@ -1,9 +1,13 @@
 package com.example.lifecycle
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import com.example.lifecycle.databinding.ActivityMainBinding
+import java.time.Duration
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding.secondBtn.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
+            showToast("Hello World",5000)
         }
         binding.fragmentBtn.setOnClickListener {
             supportFragmentManager.beginTransaction().add(R.id.fragment,FirstFragment()).commit()
@@ -29,7 +34,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    override fun onStart() {
+    fun Context.showToast(message:String, duration: Int) = Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+
+        override fun onStart() {
         super.onStart()
         Log.d("MainActivity", "onStart succeed")
     }
